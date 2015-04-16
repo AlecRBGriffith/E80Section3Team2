@@ -163,4 +163,6 @@ if plot_fft
     title('Mic #1 FFT');
 end
 
-plotPhaseDiff(speaker1,mic1);
+[t,ph] = getPhaseDiff(speaker1,mic1,400,550);
+plot(t,ph);
+
