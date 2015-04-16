@@ -2,17 +2,18 @@
 
 clear;
 
+%plotting options. Maybe these should be user input controlled?
 plot_temp = false;
 plot_accel = false;
 plot_gyro = false;
 plot_sound = false;
-plot_fft = true;
+plot_fft = false;
 
 disp(sprintf(['\nThis script will take the data off of the SD card and '...
     'plot the data nicely.\nWarning: This will take a very long time'...
     ' with a large data file.\n']));
 
-% Get the input file:
+% Get the input filename:
 SDOption = '';
 while (~strcmp(SDOption,'y') && ~strcmp(SDOption,'n'))
     SDOption = input(['Do you want to take the data from the SD card?'...
@@ -29,11 +30,12 @@ while (~strcmp(SDOption,'y') && ~strcmp(SDOption,'n'))
     end
     disp('Enter y or n\n');
 end
-
 disp(sprintf('\n'));
 
+%Load the input file using the provided function
 [X,Y] = ReadBinaryFileTX(filename,14,300000,3.3);
 
+%unpackage the arrays into usable data
 mic1 = [X(:,1),Y(:,1)];
 mic2 = [X(:,2),Y(:,2)];
 mic3 = [X(:,3),Y(:,3)];
@@ -51,6 +53,7 @@ speaker3 = [X(:,14),Y(:,14)];
 
 disp('Data has been loaded');
 
+%plot the data
 if plot_temp
     temp = figure;
     plot(cjc(:,1),cjc(:,2),'k');
@@ -144,7 +147,7 @@ end
 if plot_fft
     fft1 = figure;
     subplot(1,2,1)
-    [f1s,X1s]=niceFFT(speaker1(1:1000,1),speaker1(1:1000,2));
+    [f1s,X1s]=niceFFT(speaker1(1:2000,1),speaker1(1:2000,2));
     plot(f1s,abs(X1s));
     xlim([100,10000]);
     xlabel('Frequency (Hz)');
@@ -152,10 +155,12 @@ if plot_fft
     title('Speaker #1 FFT');
     
     subplot(1,2,2)
-    [f1m,X1m]=niceFFT(mic1(1:1000,1),mic1(1:1000,2));
+    [f1m,X1m]=niceFFT(mic1(1:2000,1),mic1(1:2000,2));
     plot(f1m,abs(X1m));
     xlim([100,10000]);
     xlabel('Frequency (Hz)');
     ylabel('Magnitude (V)');
     title('Mic #1 FFT');
 end
+
+plotPhaseDiff(speaker1,mic1);
