@@ -24,7 +24,7 @@ function [t,ph] = getPhaseDiff(S,M,fmin,fmax)
 %           the desired frequency, in radians, as a function of time
 %
 
-samps = 2000;
+samps = 500;
 
 N = floor(length(S)/samps);
 ph = zeros(1, N);
