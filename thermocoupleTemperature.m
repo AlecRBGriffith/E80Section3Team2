@@ -1,6 +1,4 @@
 function temp = thermocoupleTemperature( thermoV, CJC )
-% Need extra function or to add in here reversing the gain and 
-% voltage offset we have for this to work with the datalogger.
 vOffset = 4.04504;
 gain = (1+100/.560);
 thermo_mV = themoV/gain - vOffset;
