@@ -3,10 +3,10 @@
 clear;
 
 %plotting options. Maybe these should be user input controlled?
-plot_temp = false;
-plot_accel = false;
-plot_gyro = false;
-plot_sound = false;
+plot_temp = true;
+plot_accel = true;
+plot_gyro = true;
+plot_sound = true;
 plot_fft = false;
 
 disp(sprintf(['\nThis script will take the data off of the SD card and '...
@@ -163,6 +163,7 @@ if plot_fft
     title('Mic #1 FFT');
 end
 
+phase = figure;
 [t,ph] = getPhaseDiff(speaker1,mic1,400,550);
 plot(t,ph);
 
