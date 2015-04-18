@@ -24,15 +24,19 @@ function [t,ph] = getPhaseDiff(S,M,fmin,fmax)
 %           the desired frequency, in radians, as a function of time
 %
 
-samps = 500;
+samps = 1000;
 
+% Initialize our phase vector (with 0s)
 N = floor(length(S)/samps);
 ph = zeros(1, N);
 
 for i = 1:samps:(length(S)-samps)
+    % Get the fft of our inputs inside the frequency range and over a short
+    % period of time (number of points = samps)
     [~,Xs] = FFTrange(S(i:i+samps,1),S(i:i+samps,2),fmin,fmax);
     [~,Xm] = FFTrange(M(i:i+samps,1),M(i:i+samps,2),fmin,fmax);
 
+    
     [~,index] = max( abs(Xs(2:end)) );
     phase_diff = phase(Xs(index+1))-phase(Xm(index+1));
     phase_diff = mod(phase_diff,2*pi);
