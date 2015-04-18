@@ -1,11 +1,15 @@
 # E80Section3Team2
 
-## TODO:
+### TODO:
 
- * Use calibration/datasheets to create functions that convert voltages into
-    temperature, acceleration, and angular velocity
-
- * Test the ability of the phase difference function to tell the difference between
-    data taken at different temperatures
-
- * Develop a way to pull the frequency shift (acceleration) data out of the data
+ * 6-DoF model using calibration
+ * Temperature calibration/voltage conversion for both thermocouple and thermistor
+ * function to use CJC
+ * frequency shift function
+ * correct phase shift for sampling offset error
+ * flight time from phase shift - what if our shift >2 pi 
+ * velocity from flight times
+ * temperature from flight time
+ * acceleration from frequency shift
+ 
+ 
