@@ -3,8 +3,7 @@ function [ z, y, z ] = six_dof(ax,ay,az,gx,gy,gz,dt)
 % This function takes acceleration and angular velocity data and produces
 % x,y,z cartesian coordinates
 %
-% NOTE: This function asigns a starting position of (0,0,0) and initial 
-%       orientation along the x-axis
+% NOTE: This function asigns a starting position of (0,0,0)
 %
 % INPUTS:
 %     - ax: acceleration along the x-axis in the local frame, in m/s^2
@@ -69,4 +68,3 @@ y = cumtrapz(cumtrapz(ay)*dt)*dt;
 z = cumtrapz(cumtrapz(ay)*dt)*dt;
 
 end
-
