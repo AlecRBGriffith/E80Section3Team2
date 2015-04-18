@@ -8,7 +8,7 @@ plot_accel = 0;
 plot_gyro = 0;
 plot_sound = 0;
 plot_fft = 0;
-plot_phase_shift = 0;
+plot_phase_shift = 1;
 
 disp(sprintf(['\nThis script will take the data off of the SD card and '...
     'plot the data nicely.\nWarning: This will take a very long time'...
@@ -148,17 +148,15 @@ end
 if plot_fft
     fft1 = figure;
     subplot(1,2,1)
-    [f1s,X1s]=niceFFT(speaker1(1:2000,1),speaker1(1:2000,2));
+    [f1s,X1s]=FFTrange(speaker1(1:2000,1),speaker1(1:2000,2),100,10000);
     plot(f1s,abs(X1s));
-    xlim([100,10000]);
     xlabel('Frequency (Hz)');
     ylabel('Magnitude (V)');
     title('Speaker #1 FFT');
     
     subplot(1,2,2)
-    [f1m,X1m]=niceFFT(mic1(1:2000,1),mic1(1:2000,2));
+    [f1m,X1m]=FFTrange(mic1(1:2000,1),mic1(1:2000,2),100,10000);
     plot(f1m,abs(X1m));
-    xlim([100,10000]);
     xlabel('Frequency (Hz)');
     ylabel('Magnitude (V)');
     title('Mic #1 FFT');
@@ -167,7 +165,7 @@ end
 if plot_phase_shift
     phase = figure;
     [t,ph] = getPhaseDiff(speaker1,mic1,400,550);
-    ph_filt = filter(.25, [1 -.75], ph);
+    ph_filt = filter(.5, [1 -.5], ph);
     plot(t,ph);
     hold on
     plot(t,ph_filt,'r')

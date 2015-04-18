@@ -25,8 +25,10 @@ fs = 1/(t(2)-t(1));
 f0 = fs/(2*length(X));
 f = 0:f0:f0*(length(X)-1);
 
-imin = floor(fmin/f0);
-imax = ceil(fmax/f0);
+imin = ceil(fmin/f0);
+imax = floor(fmax/f0);
 
 X = X(imin:imax);
 f = f(imin:imax);
+
+end

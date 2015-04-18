@@ -22,3 +22,5 @@ X = X(1:floor(length(X)/2));
 fs = 1/(t(2)-t(1));
 f0 = fs/(2*length(X));
 f = 0:f0:f0*(length(X)-1);
+
+end
