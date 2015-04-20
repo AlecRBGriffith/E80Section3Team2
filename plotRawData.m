@@ -35,7 +35,6 @@ disp(sprintf('\n'));
 
 %Load the input file using the provided function
 [X,Y] = ReadBinaryFileTX(filename,14,300000,3.3);
-
 %unpackage the arrays into usable data
 mic1 = [X(:,1),Y(:,1)];
 mic2 = [X(:,2),Y(:,2)];
@@ -164,10 +163,10 @@ end
 
 if plot_phase_shift
     phase = figure;
-    [t,ph] = getPhaseDiff(speaker1,mic1,400,550);
+    [X,ph] = getPhaseDiff(speaker1,mic1,400,550);
     ph_filt = filter(.5, [1 -.5], ph);
-    plot(t,ph);
+    plot(X,ph);
     hold on
-    plot(t,ph_filt,'r')
+    plot(X,ph_filt,'r')
 end
 
