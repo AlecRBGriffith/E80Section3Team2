@@ -33,23 +33,27 @@ while (~strcmp(SDOption,'y') && ~strcmp(SDOption,'n'))
 end
 disp(sprintf('\n'));
 
+channels = 14;
+
 %Load the input file using the provided function
-[X,Y] = ReadBinaryFileTX(filename,14,300000,3.3);
+[X,Y] = ReadBinaryFileTX(filename,channels,300000,3.3);
+%Shift variable for misallinged data
+
 %unpackage the arrays into usable data
-mic1 = [X(:,1),Y(:,1)];
-mic2 = [X(:,2),Y(:,2)];
-mic3 = [X(:,3),Y(:,3)];
-cjc = [X(:,4),Y(:,4)];
-thermocouple = [X(:,5),Y(:,5)];
-gyro_x = [X(:,6),Y(:,6)];
-gyro_y = [X(:,7),Y(:,7)];
-gyro_z = [X(:,8),Y(:,8)];
-accel_x = [X(:,9),Y(:,9)];
-accel_y = [X(:,10),Y(:,10)];
-accel_z = [X(:,11),Y(:,11)];
-speaker1 = [X(:,12),Y(:,12)];
-speaker2 = [X(:,13),Y(:,13)];
-speaker3 = [X(:,14),Y(:,14)];
+mic1 = [X(:,9),Y(:,9)];
+mic2 = [X(:,10),Y(:,10)];
+mic3 = [X(:,11),Y(:,11)];
+cjc = [X(:,12),Y(:,12)];
+thermocouple = [X(:,13),Y(:,13)];
+gyro_x = [X(:,14),Y(:,14)];
+gyro_y = [X(:,1),Y(:,1)];
+gyro_z = [X(:,2),Y(:,2)];
+accel_x = [X(:,3),Y(:,3)];
+accel_y = [X(:,4),Y(:,4)];
+accel_z = [X(:,5),Y(:,5)];
+speaker1 = [X(:,6),Y(:,6)];
+speaker2 = [X(:,7),Y(:,7)];
+speaker3 = [X(:,8),Y(:,8)];
 
 disp('Data has been loaded');
 

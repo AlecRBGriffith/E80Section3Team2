@@ -13,6 +13,6 @@ if __name__ == '__main__':
     MEG = 2**20
     GIG = 2**30
     DESIRED = 14*10*MEG
-    FUDGE = 14*KIL
+    FUDGE = 1*KIL
     copypart('F:\\flightOneTrimmed.dat','F:\\flightOneTrimmedExperiment.dat',14*50*MEG,DESIRED+FUDGE)
     print('Finished')
