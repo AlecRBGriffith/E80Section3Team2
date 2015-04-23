@@ -60,7 +60,7 @@ for i = 1:samps:(length(S)-samps)
     phase_diff = phase(Xs(index+1))-phase(Xm(index+1));
     phase_diff = mod(phase_diff,2*pi);
     ph(ceil(i/samps)) = phase_diff+phase_offset;
-    f(ceil(i/samps)) = fs;
+    f(ceil(i/samps)) = fs(index);
 end
 
 end

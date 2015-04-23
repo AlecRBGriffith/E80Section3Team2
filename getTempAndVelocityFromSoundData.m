@@ -37,6 +37,7 @@ d2 = 0.3;
 % this should be fine if the sampling frequency is high
 t = 0.5*(t1+t2);
 
+% get temperature using equation c = sqrt(gamma*R*t)
 gamma = 48.34;
 R = 8.3145;
 temp = c^2/(gamma*R);
