@@ -1,5 +1,7 @@
 % plotRawData.m
 
+%Close other graphs, get rid of if you want to hold
+close all;
 clear;
 
 %plotting options. Maybe these should be user input controlled?
@@ -16,21 +18,21 @@ disp(sprintf(['\nThis script will take the data off of the SD card and '...
 
 % Get the input filename:
 SDOption = '';
-while (~strcmp(SDOption,'y') && ~strcmp(SDOption,'n'))
-    SDOption = input(['Do you want to take the data from the SD card?'...
-        ' [y/n] '],'s');
-    if(strcmp(SDOption,'y'))
-        file_number = input(['Enter the last two digits of the file number'...
-        ' (files are in form "DATA00XX.DAT"): '],'s');
-        filename = ['/Volumes/E80S3T2/DATA00' file_number '.DAT'];
-        continue;
-    end
-    if(strcmp(SDOption,'n'))
-        filename = input('Enter filename: ','s');
-        continue;
-    end
-    disp('Enter y or n\n');
-end
+%while (~strcmp(SDOption,'y') && ~strcmp(SDOption,'n'))
+   % SDOption = input(['Do you want to take the data from the SD card?'...
+    %    ' [y/n] '],'s');
+    %if(strcmp(SDOption,'y'))
+     %   file_number = input(['Enter the last two digits of the file number'...
+      %  ' (files are in form "DATA00XX.DAT"): '],'s');
+       % filename = ['/Volumes/E80S3T2/DATA00' file_number '.DAT'];
+        %continue;
+    %end
+    %if(strcmp(SDOption,'n'))
+        filename = 'F:\flightTwoTrimmed.dat'; % input('Enter filename: ','s');
+     %   continue;
+    %end
+    %disp('Enter y or n\n');
+%end
 disp(sprintf('\n'));
 
 channels = 14;

@@ -14,5 +14,9 @@ if __name__ == '__main__':
     GIG = 2**30
     DESIRED = 14*10*MEG
     FUDGE = 1*KIL
-    copypart('F:\\flightOneTrimmed.dat','F:\\flightOneTrimmedExperiment.dat',14*50*MEG,DESIRED+FUDGE)
+    i = 0
+    #while DESIRED + i < 2100*MEG+DESIRED:
+    copypart('F:\\flightTwo.dat','F:\\flightTwoTrimmed' + '.DAT',106496,2000*MEG)
+     #   i = i + DESIRED
+        
     print('Finished')
