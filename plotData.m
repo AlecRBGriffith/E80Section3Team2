@@ -41,35 +41,32 @@ channels = 14;
 
 %Load the input file using the provided function
 [X,Y] = ReadBinaryFileTX(filename,channels,300000,3.3);
-%Shift variable for misallinged data
 
-%unpackage the arrays into usable data
-shift = 0;
+disp('Data has been loaded');
 
 mic1_raw = [X(:,1),Y(:,1)];
 mic2_raw = [X(:,2),Y(:,2)];
 mic3_raw = [X(:,3),Y(:,3)];
-cjc_raw =  [X(:,4),Y(:,4)];
-thermocouple_raw = [X(:,5),Y(:,5)];
-gyro_x_raw =   [X(:,6),Y(:,6)];
-gyro_y_raw =   [X(:,7),Y(:,7)];
-gyro_z_raw =   [X(:,8),Y(:,8)];
-accel_x_raw =  [X(:,9),Y(:,9)];
-accel_y_raw =  [X(:,10),Y(:,10)];
-accel_z_raw =  [X(:,11),Y(:,11)];
 speaker1_raw = [X(:,12),Y(:,12)];
 speaker2_raw = [X(:,13),Y(:,13)];
 speaker3_raw = [X(:,14),Y(:,14)];
 
-disp('Data has been loaded');
-
 [sound_tv_time,sound_temp,sound_v] = getTempAndVelocityFromSoundData(...
                              speaker1_raw,mic2_raw,speaker2_raw,mic1_raw_);
                          
-cjc_time = cjc_raw(:,1);
-cjc_temp = thermistor(cjc_raw(:,2));
+cjc_time = X(:,4);
+cjc_temp = thermistor(Y(:,4));
 
-thermocouple_time = thermocouple_raw(:,1);
-thermocouple_temp = thermocoupleTemperature(thermocouple_raw(:,2),cjc_temp);
+thermocouple_time = X(:,5);
+thermocouple_temp = thermocoupleTemperature(Y(:,5),cjc_temp);
 
-gx = translate_IMU_Data(gyro_x_raw(:,2))
+gx = translate_IMU_Data(Y(:,6),'gx');
+gy = translate_IMU_Data(Y(:,7),'gy');
+gz = translate_IMU_Data(Y(:,8),'gz');
+ax = translate_IMU_Data(Y(:,9),'ax');
+ay = translate_IMU_Data(Y(:,10),'ay');
+az = translate_IMU_Data(Y(:,11),'az');
+dt = X(2,6)-X(1,6);
+[x,y,z] = six_dof(ax,ay,az,gx,gy,gz,dt);
+
+

@@ -1,4 +1,4 @@
-function [ z, y, z ] = six_dof(ax,ay,az,gx,gy,gz,dt)
+function [ x, y, z ] = six_dof(ax,ay,az,gx,gy,gz,dt)
 %
 % This function takes acceleration and angular velocity data and produces
 % x,y,z cartesian coordinates
