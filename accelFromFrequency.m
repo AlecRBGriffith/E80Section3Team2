@@ -2,11 +2,13 @@ function a = accelFromFrequency( frequencyBase, frequencyShifted,c,v)
 %
 % Take frequences from FFT's, our currrent speed of sound and velocity,
 % and get a value for acceleration
+%
 % Inputs:
-%     - frequencyBase: frequency base, speaker frequency
-%     - frequencyShifted: frequency from FFT of mic
-%     - c: speed of sound at this instant
-%     - v: speed of rocket at this instant
+%     - frequencyBase: a vector of the frequency of the signal applied to
+%                      the speaker
+%     - frequencyShifted: a vector of the frequency picked up by the mic
+%     - c: vector of speed of sound values
+%     - v: vector of speed of rocket values
 % Outputs:
 %     - a: acceleration
 %    
