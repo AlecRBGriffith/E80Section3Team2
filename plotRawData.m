@@ -8,7 +8,7 @@ plot_accel = 1;
 plot_gyro = 1;
 plot_sound = 1;
 plot_fft = 1;
-plot_phase_shift = 1;
+plot_phase_shift = 0;
 
 disp(sprintf(['\nThis script will take the data off of the SD card and '...
     'plot the data nicely.\nWarning: This will take a very long time'...
@@ -40,20 +40,22 @@ channels = 14;
 %Shift variable for misallinged data
 
 %unpackage the arrays into usable data
-mic1 = [X(:,9),Y(:,9)];
-mic2 = [X(:,10),Y(:,10)];
-mic3 = [X(:,11),Y(:,11)];
-cjc = [X(:,12),Y(:,12)];
-thermocouple = [X(:,13),Y(:,13)];
-gyro_x = [X(:,14),Y(:,14)];
-gyro_y = [X(:,1),Y(:,1)];
-gyro_z = [X(:,2),Y(:,2)];
-accel_x = [X(:,3),Y(:,3)];
-accel_y = [X(:,4),Y(:,4)];
-accel_z = [X(:,5),Y(:,5)];
-speaker1 = [X(:,6),Y(:,6)];
-speaker2 = [X(:,7),Y(:,7)];
-speaker3 = [X(:,8),Y(:,8)];
+shift = 0;
+
+mic1 = [X(:,mod(shift+0,14)+1),Y(:,mod(shift+0,14)+1)];
+mic2 = [X(:,mod(shift+1,14)+1),Y(:,mod(shift+1,14)+1)];
+mic3 = [X(:,mod(shift+2,14)+1),Y(:,mod(shift+2,14)+1)];
+cjc =  [X(:,mod(shift+3,14)+1),Y(:,mod(shift+3,14)+1)];
+thermocouple = [X(:,mod(shift+4,14)+1),Y(:,mod(shift+4,14)+1)];
+gyro_x =   [X(:,mod(shift+5,14)+1),Y(:,mod(shift+5,14)+1)];
+gyro_y =   [X(:,mod(shift+6,14)+1),Y(:,mod(shift+6,14)+1)];
+gyro_z =   [X(:,mod(shift+7,14)+1),Y(:,mod(shift+7,14)+1)];
+accel_x =  [X(:,mod(shift+8,14)+1),Y(:,mod(shift+8,14)+1)];
+accel_y =  [X(:,mod(shift+9,14)+1),Y(:,mod(shift+9,14)+1)];
+accel_z =  [X(:,mod(shift+10,14)+1),Y(:,mod(shift+10,14)+1)];
+speaker1 = [X(:,mod(shift+11,14)+1),Y(:,mod(shift+11,14)+1)];
+speaker2 = [X(:,mod(shift+12,14)+1),Y(:,mod(shift+12,14)+1)];
+speaker3 = [X(:,mod(shift+13,14)+1),Y(:,mod(shift+13,14)+1)];
 
 disp('Data has been loaded');
 
