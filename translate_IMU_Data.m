@@ -1,4 +1,4 @@
-function data = accel_translate( input_data, channel)
+function data = translate_IMU_Data( input_data, channel)
 %
 % This function takes input voltages from the IMU and converts the to
 % acceleration and angular velocity data
