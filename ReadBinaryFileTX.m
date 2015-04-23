@@ -42,6 +42,18 @@ function [t, x] = ReadBinaryFileTX(fileName, N, Fs, scale)
         if (scale)
             x = x*3.3/(2^16);
         end
+    if (N == 1)
+        % Read the data
+        fileID = fopen(fileName, 'r', 'b');
+        x = fread(fileID, [N, inf], 'uint16', 0, 'b')';
+        fclose(fileID);
+        
+        % Create time matrix
+        samples = numel(x);
+        t = reshape(0:samples-1, N, [])'/Fs;
+        
+        %if we are reading one channel we are benchmarking, do not scale
+        %data
     else
         error('N must be an even number')
     end
