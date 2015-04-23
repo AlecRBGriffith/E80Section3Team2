@@ -12,11 +12,11 @@ if __name__ == '__main__':
     KIL = 2**10
     MEG = 2**20
     GIG = 2**30
-    DESIRED = 14*10*MEG
+    DESIRED = 15*10*MEG
     FUDGE = 1*KIL
     i = 0
-    #while DESIRED + i < 2100*MEG+DESIRED:
-    copypart('F:\\flightTwo.dat','F:\\flightTwoTrimmed' + '.DAT',106496,2000*MEG)
-     #   i = i + DESIRED
+    while i*DESIRED <= 450*MEG:
+        copypart('thermotronData.dat','thermotronDataSlice' +str(i)+'.DAT',i*DESIRED,DESIRED)
+        i += 1
         
     print('Finished')

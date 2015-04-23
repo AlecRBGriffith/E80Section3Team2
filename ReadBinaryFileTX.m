@@ -42,7 +42,7 @@ function [t, x] = ReadBinaryFileTX(fileName, N, Fs, scale)
         if (scale)
             x = x*3.3/(2^16);
         end
-    if (N == 1)
+    elseif (N == 1)
         % Read the data
         fileID = fopen(fileName, 'r', 'b');
         x = fread(fileID, [N, inf], 'uint16', 0, 'b')';

@@ -5,9 +5,9 @@ close all;
 clear;
 
 %plotting options. Maybe these should be user input controlled?
-plot_temp = 0;
-plot_accel = 0;
-plot_gyro = 0;
+plot_temp = 1;
+plot_accel = 1;
+plot_gyro = 1;
 plot_sound = 1;
 plot_fft = 1;
 plot_phase_shift = 1;

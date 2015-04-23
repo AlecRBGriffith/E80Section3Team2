@@ -1,8 +1,8 @@
-function [t,ph] = getPhaseDiff(S,M,fmin,fmax)
+function [t,ph,f] = getPhaseDiff(S,M,fmin,fmax)
 %
 % this function takes speaker and microphone data and finds the phase
 % differece as a function of time
-% The frequency used is the maximum off the fft within the input frequency
+% The frequency used is the maximum of the fft within the input frequency
 % range
 %
 % Inputs:
@@ -31,6 +31,7 @@ samps = 1000;
 % Initialize our phase vector (with 0s)
 N = floor(length(S)/samps);
 ph = zeros(1, N);
+f  = zeros(1, N);
 
 % Generate the time vector
 dt = (S(2,1)-S(1,1))*samps;
@@ -44,7 +45,7 @@ time_diff = S(1,1)-M(1,1);
 for i = 1:samps:(length(S)-samps)
     % Get the fft of our inputs inside the frequency range and over a short
     % period of time (number of points = samps)
-    [f,Xs] = FFTrange(S(i:i+samps,1),S(i:i+samps,2),fmin,fmax);
+    [fs,Xs] = FFTrange(S(i:i+samps,1),S(i:i+samps,2),fmin,fmax);
     [~,Xm] = FFTrange(M(i:i+samps,1),M(i:i+samps,2),fmin,fmax);
 
     % Get the index of the dominant frequency from the speaker in the
@@ -52,13 +53,14 @@ for i = 1:samps:(length(S)-samps)
     [~,index] = max( abs(Xs(2:end)) );
     
     % Get the phase offset due to not sampling simultaneously
-    phase_offset = 2*pi*f(index)*time_diff;
+    phase_offset = 2*pi*fs(index)*time_diff;
     
     % Get the phase difference between the speaker and mic, and store it in
     % the phase vector, ph
     phase_diff = phase(Xs(index+1))-phase(Xm(index+1));
     phase_diff = mod(phase_diff,2*pi);
     ph(ceil(i/samps)) = phase_diff+phase_offset;
+    f(ceil(i/samps)) = fs;
 end
 
 end

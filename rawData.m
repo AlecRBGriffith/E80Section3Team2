@@ -14,6 +14,6 @@ for i = 1:14
     subplot(3,5,i)
     plot(X(:,i),Y(:,i))
     ylim([0 4])
-    disp(sprintf('Plotted %d',i));
+    fprintf('Plotted %d\n',i);
 end
 
