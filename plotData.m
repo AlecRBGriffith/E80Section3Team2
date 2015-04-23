@@ -46,23 +46,30 @@ channels = 14;
 %unpackage the arrays into usable data
 shift = 0;
 
-mic1_raw = [X(:,mod(shift+0,14)+1),Y(:,mod(shift+0,14)+1)];
-mic2_raw = [X(:,mod(shift+1,14)+1),Y(:,mod(shift+1,14)+1)];
-mic3_raw = [X(:,mod(shift+2,14)+1),Y(:,mod(shift+2,14)+1)];
-cjc_raw =  [X(:,mod(shift+3,14)+1),Y(:,mod(shift+3,14)+1)];
-thermocouple_raw = [X(:,mod(shift+4,14)+1),Y(:,mod(shift+4,14)+1)];
-gyro_x_raw =   [X(:,mod(shift+5,14)+1),Y(:,mod(shift+5,14)+1)];
-gyro_y_raw =   [X(:,mod(shift+6,14)+1),Y(:,mod(shift+6,14)+1)];
-gyro_z_raw =   [X(:,mod(shift+7,14)+1),Y(:,mod(shift+7,14)+1)];
-accel_x_raw =  [X(:,mod(shift+8,14)+1),Y(:,mod(shift+8,14)+1)];
-accel_y_raw =  [X(:,mod(shift+9,14)+1),Y(:,mod(shift+9,14)+1)];
-accel_z_raw =  [X(:,mod(shift+10,14)+1),Y(:,mod(shift+10,14)+1)];
-speaker1_raw = [X(:,mod(shift+11,14)+1),Y(:,mod(shift+11,14)+1)];
-speaker2_raw = [X(:,mod(shift+12,14)+1),Y(:,mod(shift+12,14)+1)];
-speaker3_raw = [X(:,mod(shift+13,14)+1),Y(:,mod(shift+13,14)+1)];
+mic1_raw = [X(:,1),Y(:,1)];
+mic2_raw = [X(:,2),Y(:,2)];
+mic3_raw = [X(:,3),Y(:,3)];
+cjc_raw =  [X(:,4),Y(:,4)];
+thermocouple_raw = [X(:,5),Y(:,5)];
+gyro_x_raw =   [X(:,6),Y(:,6)];
+gyro_y_raw =   [X(:,7),Y(:,7)];
+gyro_z_raw =   [X(:,8),Y(:,8)];
+accel_x_raw =  [X(:,9),Y(:,9)];
+accel_y_raw =  [X(:,10),Y(:,10)];
+accel_z_raw =  [X(:,11),Y(:,11)];
+speaker1_raw = [X(:,12),Y(:,12)];
+speaker2_raw = [X(:,13),Y(:,13)];
+speaker3_raw = [X(:,14),Y(:,14)];
 
 disp('Data has been loaded');
 
-Sound_TandV = getTempAndVelocityFromSoundData(speaker1_raw,mic2_raw,...
-                                             speaker2_raw,mic1_raw_);
-thermistor = thermistor(cjc_raw);
+[sound_tv_time,sound_temp,sound_v] = getTempAndVelocityFromSoundData(...
+                             speaker1_raw,mic2_raw,speaker2_raw,mic1_raw_);
+                         
+cjc_time = cjc_raw(:,1);
+cjc_temp = thermistor(cjc_raw(:,2));
+
+thermocouple_time = thermocouple_raw(:,1);
+thermocouple_temp = thermocoupleTemperature(thermocouple_raw(:,2),cjc_temp);
+
+gx = translate_IMU_Data(gyro_x_raw(:,2))
