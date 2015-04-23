@@ -10,7 +10,7 @@ function a = accelFromFrequency( frequencyBase, frequencyShifted,c,v)
 %     - c: vector of speed of sound values
 %     - v: vector of speed of rocket values
 % Outputs:
-%     - a: acceleration
+%     - a: vector of calculated acceleration
 %    
 
     d = 0.2; % Hard code a distance here
