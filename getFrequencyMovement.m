@@ -15,6 +15,7 @@ function [T,F] = getFrequencyMovement(x,t)
 %     is taken over
 %     - F: a vector with the dominite frequency at each time step.
 
+
 samps = 1000;
 
 %This factor is the amount of points to the left and right that will be 
@@ -30,11 +31,11 @@ T = zeros(1, N);
 
 
 for i = 1:samps:(length(x)-samps)
+
     % Get the fft of our inputs 
-    [freq,X] = niceFFT(t(i:i+samps),x(i:i+samps));
+    [freq,X] = niceFFT(t(i:i+samps), x(i:i+samps));
     % Find the maximum value and the index of that value
     [~,I] = max(X);
-    freq(I)
     
     %get the points around the max so we can use quadratic interpolation
     k1 = abs(X(I-1));
@@ -60,6 +61,6 @@ function freq = quadInterpolation(ym1,y0,yp1,N,fs,bin)
     p = (yp1 - ym1)/(2*(2*y0 - yp1 - ym1));
     
     
-    freq = (((bin - 1)+p) *fs)/N;
+    freq = (((bin-1)+p) *fs)/N;
     
 end
