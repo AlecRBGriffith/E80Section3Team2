@@ -15,8 +15,8 @@ if __name__ == '__main__':
     DESIRED = 15*10*MEG
     FUDGE = 1*KIL
     i = 0
-    while i*DESIRED <= 450*MEG:
-        copypart('thermotronData.dat','thermotronDataSlice' +str(i)+'.DAT',i*DESIRED,DESIRED)
+    while i*DESIRED <= 1500*MEG:
+        copypart('thermotronData.dat','thermotronDataSlice' + str(i) +'.DAT',i*DESIRED,DESIRED)
         i += 1
         
     print('Finished')

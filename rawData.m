@@ -6,14 +6,14 @@ function rawData(filename)
 %     - filename: a string, the full filename of the input .DAT file
 
 % Load the input file using the provided function
-[X,Y] = ReadBinaryFileTX(filename,14,300000,3.3);
+[X,Y] = ReadBinaryFileTX(filename,12,120000,3.3);
 disp('Loaded data')
 
 % plot all 14 channels in a single subplot
-for i = 1:14
-    subplot(3,5,i)
+for i = 1:12
+    subplot(3,4,i)
     plot(X(:,i),Y(:,i))
-    ylim([0 4])
+    ylim([-1 4])
     fprintf('Plotted %d\n',i);
 end
 

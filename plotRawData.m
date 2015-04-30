@@ -44,21 +44,29 @@ channels = 14;
 %unpackage the arrays into usable data
 shift = 0;
 
-mic1 = [X(:,mod(shift+0,14)+1),Y(:,mod(shift+0,14)+1)];
-mic2 = [X(:,mod(shift+1,14)+1),Y(:,mod(shift+1,14)+1)];
-mic3 = [X(:,mod(shift+2,14)+1),Y(:,mod(shift+2,14)+1)];
-cjc =  [X(:,mod(shift+3,14)+1),Y(:,mod(shift+3,14)+1)];
-thermocouple = [X(:,mod(shift+4,14)+1),Y(:,mod(shift+4,14)+1)];
-gyro_x =   [X(:,mod(shift+5,14)+1),Y(:,mod(shift+5,14)+1)];
-gyro_y =   [X(:,mod(shift+6,14)+1),Y(:,mod(shift+6,14)+1)];
-gyro_z =   [X(:,mod(shift+7,14)+1),Y(:,mod(shift+7,14)+1)];
-accel_x =  [X(:,mod(shift+8,14)+1),Y(:,mod(shift+8,14)+1)];
-accel_y =  [X(:,mod(shift+9,14)+1),Y(:,mod(shift+9,14)+1)];
-accel_z =  [X(:,mod(shift+10,14)+1),Y(:,mod(shift+10,14)+1)];
-speaker1 = [X(:,mod(shift+11,14)+1),Y(:,mod(shift+11,14)+1)];
-speaker2 = [X(:,mod(shift+12,14)+1),Y(:,mod(shift+12,14)+1)];
-speaker3 = [X(:,mod(shift+13,14)+1),Y(:,mod(shift+13,14)+1)];
 
+if (plot_temp)
+    cjc =  [X(:,mod(shift+3,14)+1),Y(:,mod(shift+3,14)+1)];
+    thermocouple = [X(:,mod(shift+4,14)+1),Y(:,mod(shift+4,14)+1)];
+end
+if (plot_gyro)
+    gyro_x =   [X(:,mod(shift+5,14)+1),Y(:,mod(shift+5,14)+1)];
+    gyro_y =   [X(:,mod(shift+6,14)+1),Y(:,mod(shift+6,14)+1)];
+    gyro_z =   [X(:,mod(shift+7,14)+1),Y(:,mod(shift+7,14)+1)];
+end
+if (plot_accel)
+    accel_x =  [X(:,mod(shift+8,14)+1),Y(:,mod(shift+8,14)+1)];
+    accel_y =  [X(:,mod(shift+9,14)+1),Y(:,mod(shift+9,14)+1)];
+    accel_z =  [X(:,mod(shift+10,14)+1),Y(:,mod(shift+10,14)+1)];
+end
+if (plot_phase_shift || plot_sound || plot_fft)
+    speaker1 = [X(:,mod(shift+11,14)+1),Y(:,mod(shift+11,14)+1)];
+    speaker2 = [X(:,mod(shift+12,14)+1),Y(:,mod(shift+12,14)+1)];
+    speaker3 = [X(:,mod(shift+13,14)+1),Y(:,mod(shift+13,14)+1)];
+    mic1 = [X(:,mod(shift+0,14)+1),Y(:,mod(shift+0,14)+1)];
+    mic2 = [X(:,mod(shift+1,14)+1),Y(:,mod(shift+1,14)+1)];
+    mic3 = [X(:,mod(shift+2,14)+1),Y(:,mod(shift+2,14)+1)];
+end
 disp('Data has been loaded');
 
 %plot the data
@@ -162,7 +170,7 @@ if plot_fft
     title('Speaker #1 FFT');
     
     subplot(1,2,2)
-    [f1m,X1m]=FFTrange(mic1(1:2000,1),mic1(1:2000,2),100,10000);
+    [f1m,X1m]=FFTrange(mic2(1:2000,1),mic2(1:2000,2),100,10000);
     plot(f1m,abs(X1m));
     xlabel('Frequency (Hz)');
     ylabel('Magnitude (V)');
@@ -171,8 +179,8 @@ end
 
 if plot_phase_shift
     phase = figure;
-    [X,ph] = getPhaseDiff(speaker1,mic1,400,550);
-    ph_filt = filter(.5, [1 -.5], ph);
+    [X,ph] = getPhaseDiff(speaker1,mic2,4900,5100);
+    ph_filt = filter(.25, [1 -.75], ph);
     plot(X,ph);
     hold on
     plot(X,ph_filt,'r')
