@@ -72,7 +72,6 @@ if plot_fft
     ylabel('Magnitude (V)');
     title('Mic #1 FFT');
     
-    fft1 = figure;
     subplot(2,2,3)
     [f1s,X1s]=FFTrange(tt(1:2000),speaker2(1:2000),100,10000);
     plot(f1s,abs(X1s));
@@ -90,10 +89,19 @@ end
 
 if plot_phase_shift
     phase = figure;
-    [X,ph] = getPhaseDiff(speaker1,mic1,400,550);
-    ph_filt = filter(.5, [1 -.5], ph);
-    plot(X,ph);
-    hold on
-    plot(X,ph_filt,'r')
+    subplot(2,2,1)
+    [T1,ph1,f1] = getPhaseDiff([tt,speaker1],[tt,mic2],2000,2200);
+    ph_filt1 = filter(.5, [1 -.5], ph1);
+    plot(T1,ph1);
+    subplot(2,2,2)
+    plot(T1,f1)
+    
+    
+    subplot(2,2,3)
+    [T2,ph2,f2] = getPhaseDiff([tt,speaker2],[tt,mic1],1700,1900);
+    ph_filt2 = filter(.5, [1 -.5], ph2);
+    plot(T2,ph2);
+    subplot(2,2,4)
+    plot(T2,f2)
 end
 

@@ -24,9 +24,10 @@ function [t,ph,f] = getPhaseDiff(S,M,fmin,fmax)
 %           the desired frequency, in radians, as a function of time
 %
 
+
 % This is the sample width for taking ffts. 1000 works well for frequencies
 % around 500Hz
-samps = 10000;
+samps = 1000;
 
 % Initialize our phase vector (with 0s)
 N = floor(length(S)/samps);
@@ -51,13 +52,13 @@ for i = 1:samps:(length(S)-samps)
     % Get the index of the dominant frequency from the speaker in the
     % frequency range
     [~,index] = max( abs(Xs(2:end)) );
-    
+
     % Get the phase offset due to not sampling simultaneously
     phase_offset = 2*pi*fs(index)*time_diff;
     
     % Get the phase difference between the speaker and mic, and store it in
     % the phase vector, ph
-    phase_diff = phase(Xs(index+1))-phase(Xm(index+1));
+    phase_diff = phase(Xm(index+1))-phase(Xs(index+1));
     ph(ceil(i/samps)) = mod(phase_diff+phase_offset,2*pi);
     f(ceil(i/samps)) = fs(index);
 end
